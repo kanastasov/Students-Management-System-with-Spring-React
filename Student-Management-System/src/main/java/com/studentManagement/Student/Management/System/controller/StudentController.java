@@ -1,5 +1,7 @@
 package com.studentManagement.Student.Management.System.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +32,12 @@ public class StudentController {
 	  
       return ResponseEntity.ok(studentDto);
   }
-}
+  
+  @GetMapping("/students")
+  public ResponseEntity<List<StudentDto>> getAllStudents(){
+	  
+	  List<StudentDto> students = studentService.getAllStudents();
+	  
+	  return ResponseEntity.ok(students);
+  }
+} 

@@ -1,5 +1,7 @@
 package com.studentManagement.Student.Management.System.service;
 
+import java.util.List;
+
 import com.studentManagement.Student.Management.System.dto.StudentDto;
 
 public interface StudentService {
@@ -7,5 +9,6 @@ public interface StudentService {
     
     StudentDto getStudentById(Long studentId);
     
+    List<StudentDto> getAllStudents();
     
 }
