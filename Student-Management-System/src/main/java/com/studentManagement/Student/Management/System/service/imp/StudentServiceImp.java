@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.studentManagement.Student.Management.System.dto.StudentDto;
 import com.studentManagement.Student.Management.System.entity.Student;
+import com.studentManagement.Student.Management.System.exception.ResourceNotFoundException;
 import com.studentManagement.Student.Management.System.mapper.StudentMapper;
 import com.studentManagement.Student.Management.System.repository.StudentRepository;
 import com.studentManagement.Student.Management.System.service.StudentService;
@@ -24,4 +25,12 @@ public class StudentServiceImp implements StudentService {
 
         return StudentMapper.mapStudentDto(savedStudent);
     }
+
+	@Override
+	public StudentDto getStudentById(Long studentId) {
+		Student student = studentRepository.findById(studentId)
+			.orElseThrow(() -> new ResourceNotFoundException("Student not found with this ID " + studentId));
+		
+		return StudentMapper.mapStudentDto(student);
+	}
 }

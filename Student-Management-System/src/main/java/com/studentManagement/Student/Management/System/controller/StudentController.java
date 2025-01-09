@@ -17,15 +17,17 @@ public class StudentController {
   private StudentService studentService;
 
 
-  @PostMapping("/product")
+  @PostMapping("/student")
   public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto) {
           StudentDto savedDto = studentService.createStudent(studentDto);
           return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
 
   }
 
-  @GetMapping("/home")
-  public String home() {
-      return "Hello World";
+  @GetMapping("{id}")
+  public ResponseEntity<StudentDto> getStudentById(@PathVariable("id") Long studentId) {
+	  StudentDto studentDto = studentService.getStudentById(studentId);
+	  
+      return ResponseEntity.ok(studentDto);
   }
 }
