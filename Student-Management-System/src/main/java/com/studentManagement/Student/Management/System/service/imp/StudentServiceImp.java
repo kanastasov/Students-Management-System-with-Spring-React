@@ -45,4 +45,25 @@ public class StudentServiceImp implements StudentService {
 		return students.stream().map((student) -> StudentMapper.mapStudentDto(student)).collect(Collectors.toList());
 	}
 
+	@Override
+	public StudentDto updateStudent(Long id, StudentDto student) {
+		Student studentinner = studentRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Student not found with this ID " + id));
+		
+		studentinner.setEmail("NewEmail@gmail.com");
+		studentinner.setFirstName("NewFirstName");
+		studentinner.setLastName("MewLastName");
+		
+		Student studentObj = studentRepository.save(studentinner);
+		
+		
+		return StudentMapper.mapStudentDto(studentObj);
+	}
+
+	@Override
+	public void deleteStudent(Long id) {
+		studentRepository.deleteById(id);
+		
+	}
+
 }
