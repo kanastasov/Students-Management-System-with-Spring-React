@@ -1,29 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+
+import { listStudents } from '../services/StudentService';
 
 const ListStudentComponent = () => {
+ const [students, setStudents] = useState([]);
+ useEffect(() => {
+    listStudents().then((response) =>
+    {
+        setStudents(response.data);
+    }).catch(error => {
+        console.error(error);
+    })
+ }
 
-    const data = [
-        {
-        "id":1,
-        "firstName":"kiril",
-        "lastName": "anastasov",
-        "email": "kirilanastasoff@gmail.com"
-        },
-        
-        {
-        "id":2,
-        "firstName":"peter",
-        "lastName": "anastasov",
-        "email": "peter@gmail.com"
-        },
-
-        {
-        "id":3,
-        "firstName":"metar",
-        "lastName": "anastasov",
-        "email": "metar@gmail.com"
-        },
-    ]
+)
   return (
     <div className='container'>
         <h2 className='text-center'>
@@ -41,7 +31,7 @@ const ListStudentComponent = () => {
 
                 <tbody>
                     {
-                        data.map(student => 
+                        students.map(student => 
                             <tr key={student.id}>
                                 <td>{student.id}</td>
                                 <td>{student.firstName}</td>

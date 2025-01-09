@@ -11,6 +11,7 @@ import com.studentManagement.Student.Management.System.dto.StudentDto;
 import com.studentManagement.Student.Management.System.service.StudentService;
 
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class StudentController {
