@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { createStudent } from '../services/StudentService';
+import React, { useEffect, useState } from 'react'
+import { createStudent, getStudent, updateStudent } from '../services/StudentService';
 import { useNavigate,useParams } from 'react-router-dom';
 const StudentComponent = () => {
     const [firstName, setFirstName] = useState('');
@@ -17,6 +17,18 @@ const StudentComponent = () => {
     //     setFirstName(e.target.value)
     // }
 
+    useEffect(() => {
+        if(id){
+          getStudent(id).then((response) => {
+            setFirstName(response.data.firstName);
+            setLastName(response.data.lastName);
+            setEmail(response.data.email);
+          })  .catch(error => {
+            console.log(error);
+          })
+        }  
+    }, [id])
+
     const handleLastName=(e) => {
         setLastName(e.target.value)
     }
@@ -26,17 +38,33 @@ const StudentComponent = () => {
         setEmail(e.target.value)
     }
 
-    const saveStudent=(e) => {
+    const saveOrUpdateStudent=(e) => {
         e.preventDefault();
 
 
         if(validateForm()){
             const student = {firstName, lastName, email};
             console.log(student);
-            createStudent(student).then((response) => {
+              console.log(id);
+            if(id){
+                updateStudent(id, student).then((response) => {
+                    console.log(response.data);
+                    navigator('/students');
+                }).catch(error =>{
+                    console.log(error);
+                }
+                    
+                );
+            }else {
+                createStudent(student).then((response) => {
                 console.log(response.data);
-            navigator('/students');
-        })
+                navigator('/students');
+            }).catch(error => {
+                console.log(error);
+            })
+            }
+       
+       
         }
        
     }
@@ -123,7 +151,7 @@ const StudentComponent = () => {
                            <div className='form-group mb-2'>
                             <label className='form-label'>Email</label>
                             <input
-                                type='password'
+                                type='text'
                                 placeholder='Enter Student Email'
                                 name='email'
                                 value={email}
@@ -134,7 +162,7 @@ const StudentComponent = () => {
 
                         </div>
 
-                        <button className='btn btn-success' onClick={saveStudent}>Submit</button>
+                        <button className='btn btn-success' onClick={saveOrUpdateStudent}>Submit</button>
                     </form>
 
                 </div>
