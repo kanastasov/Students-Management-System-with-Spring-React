@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-
 import { listStudents } from '../services/StudentService';
+import { useNavigate } from 'react-router-dom';
 
 const ListStudentComponent = () => {
  const [students, setStudents] = useState([]);
+ const navigator= useNavigate();
  useEffect(() => {
     listStudents().then((response) =>
     {
@@ -14,11 +15,16 @@ const ListStudentComponent = () => {
  }
 
 )
+
+function addNewStudent() {
+    navigator('/add-student')
+}
   return (
     <div className='container'>
         <h2 className='text-center'>
             List of students
         </h2>
+        <button className="btn btn-primary mb-2" onClick={addNewStudent}>Add Student</button>
             <table className='table table-striped table-border'>
                 <thead>
                 <tr>
