@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createStudent, getStudent, updateStudent } from '../services/StudentService';
+import { createStudent, getStudent, updateStudentService } from '../services/StudentService';
 import { useNavigate,useParams } from 'react-router-dom';
 const StudentComponent = () => {
     const [firstName, setFirstName] = useState('');
@@ -47,7 +47,7 @@ const StudentComponent = () => {
             console.log(student);
               console.log(id);
             if(id){
-                updateStudent(id, student).then((response) => {
+                updateStudentService(id, student).then((response) => {
                     console.log(response.data);
                     navigator('/students');
                 }).catch(error =>{

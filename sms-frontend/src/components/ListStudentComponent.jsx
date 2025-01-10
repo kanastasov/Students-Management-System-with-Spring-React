@@ -1,20 +1,24 @@
 import React, {useEffect, useState} from 'react'
-import { listStudents } from '../services/StudentService';
+import { deleteStudentService, listStudents } from '../services/StudentService';
 import { useNavigate } from 'react-router-dom';
 
 const ListStudentComponent = () => {
  const [students, setStudents] = useState([]);
  const navigator= useNavigate();
  useEffect(() => {
-    listStudents().then((response) =>
+    getAllStudents();
+ }
+
+)
+
+function getAllStudents() {
+   listStudents().then((response) =>
     {
         setStudents(response.data);
     }).catch(error => {
         console.error(error);
     })
- }
-
-)
+}
 
 function addNewStudent() {
     navigator('/add-student')
@@ -23,6 +27,16 @@ function addNewStudent() {
 function updateStudent(id){
     navigator(`/edit-student/${id}`)
 }
+
+  function deleteStudent(id) {
+    deleteStudentService(id) // Call the service function
+      .then((response) => {
+        getAllStudents(); // Refresh the list after successful deletion
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   return (
     <div className='container'>
         <h2 className='text-center'>
@@ -52,6 +66,9 @@ function updateStudent(id){
                                 <td>
                                     <button className='btn btn-info' onClick={()=> updateStudent(student.id)}>
                                         Update
+                                    </button>
+                                         <button className='btn btn-danger' onClick={()=> deleteStudent(student.id)}>
+                                        Delete
                                     </button>
                                 </td>
                             </tr>
