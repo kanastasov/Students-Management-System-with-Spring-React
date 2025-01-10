@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { createStudent } from '../services/StudentService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 const StudentComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-
+    const {id} = useParams();
     const [errors, setErrors] = useState({
         firstName:'',
         lastName:'',
@@ -71,6 +71,16 @@ const StudentComponent = () => {
 
 
     }
+
+    function pageTitle(){
+        if(id){
+                return <h2 className='text-center'>Update Student</h2>
+
+        }else {
+                 return <h2 className='text-center'>Add Student</h2>
+
+        }
+    }
   return (
     <div className='container'>
         <br/>
@@ -78,7 +88,9 @@ const StudentComponent = () => {
 
         <div className='row'>
             <div className='card col-md-6 offset-md-3 offset-md-3'>
-                <h2 className='text-center'>Add Student</h2>
+                    {
+                        pageTitle()
+                    }                
                 <div className='card-body'>
                     <form>
                         <div className='form-group mb-2'>

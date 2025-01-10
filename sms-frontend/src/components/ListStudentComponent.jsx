@@ -19,6 +19,10 @@ const ListStudentComponent = () => {
 function addNewStudent() {
     navigator('/add-student')
 }
+
+function updateStudent(id){
+    navigator(`/edit-student/${id}`)
+}
   return (
     <div className='container'>
         <h2 className='text-center'>
@@ -32,6 +36,8 @@ function addNewStudent() {
                     <th>student first name</th>
                     <th>student last name</th>
                     <th>student email</th>
+                    <th>Actions</th>
+
                 </tr>
                 </thead>
 
@@ -43,7 +49,11 @@ function addNewStudent() {
                                 <td>{student.firstName}</td>
                                 <td>{student.lastName}</td>
                                 <td>{student.email}</td>
-
+                                <td>
+                                    <button className='btn btn-info' onClick={()=> updateStudent(student.id)}>
+                                        Update
+                                    </button>
+                                </td>
                             </tr>
                         )
                     }
