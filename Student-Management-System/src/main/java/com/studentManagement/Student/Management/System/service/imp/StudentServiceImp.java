@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.studentManagement.Student.Management.System.dto.StudentDto;
@@ -18,6 +19,7 @@ import com.studentManagement.Student.Management.System.service.StudentService;
 @AllArgsConstructor
 public class StudentServiceImp implements StudentService {
 
+	@Autowired
 	private StudentRepository studentRepository;
 
 	@Override
