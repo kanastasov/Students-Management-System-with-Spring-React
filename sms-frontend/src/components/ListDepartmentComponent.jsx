@@ -11,20 +11,34 @@ const ListDepartmentComponent = () => {
     const navigator = useNavigate();
 
     useEffect(() => {
-      getAllDepartments().then((response) => {
+      listOfDepartments();
+        
+    })
+    function updateDepartment(id) {
+        navigator(`/edit-department/${id}`);
+    }
+
+    function deleteDepartment(id) {
+        deleteDepartment(id)
+        .then((response) => {
+            console.log(response.data);
+            listOfDepartments();
+        }).catch(err => {
+            console.log(err);
+        });
+
+
+    }
+
+     
+
+    function listOfDepartments(){
+        getAllDepartments().then((response) => {
         console.log(response.data);
         setDepartments(response.data);
       }).catch(error => {
         console.log(error) });
      
-        
-    }, [])
-    function updateDepartment(id) {
-        navigator(`/edit-department/${id}`);
-    }
-
-    function deleteDepartment() {
-
     }
   return (
     <div className='container'>

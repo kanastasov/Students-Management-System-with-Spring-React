@@ -26,7 +26,7 @@ const DepartmentComponent = () => {
 
         if(id){
             updateDepartment(id,department).then((response)=> {
-                console.log(response.data);
+            console.log(response.data);
             }).catch(err  => {
                 console.log(err)
             });
