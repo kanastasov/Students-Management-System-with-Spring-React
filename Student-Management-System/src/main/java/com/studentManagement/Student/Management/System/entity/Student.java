@@ -26,6 +26,11 @@ public class Student {
     @Column(name="email", nullable = false, unique = true)
     private String email;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+
     public Long getId() {
         return id;
     }
@@ -58,6 +63,13 @@ public class Student {
         this.email = email;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public Student(Long id, String firstName, String lastName, String email) {
         this.id = id;

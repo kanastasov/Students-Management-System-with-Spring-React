@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { createStudent, getStudent, updateStudentService } from '../services/StudentService';
 import { useNavigate,useParams } from 'react-router-dom';
+import { getAllDepartments } from '../services/DepartmentService';
 const StudentComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const {id} = useParams();
+
+   const[departmentId, setDepartmentId] =  useState('');
+   const[departments, setDepartments] = useState([]);
+
+
     const [errors, setErrors] = useState({
         firstName:'',
         lastName:'',
         email: ''
     })
+
+    useEffect(() => {
+        getAllDepartments()
+            .then((response) => {
+                setDepartments(response.data); // Ensure this is inside the .then block
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []); // Ensure proper placement of the dependency array
 
     const navigator =  useNavigate();
     // const handleFirstName=(e) => {
@@ -43,7 +59,7 @@ const StudentComponent = () => {
 
 
         if(validateForm()){
-            const student = {firstName, lastName, email};
+            const student = {firstName, lastName, email, departmentId};
             console.log(student);
               console.log(id);
             if(id){
@@ -158,6 +174,25 @@ const StudentComponent = () => {
                                 className={`form-control ${errors.email ?  'is-invalid' : ''}`}
                                 onChange={handleEmail}>
                                 </input>
+                                {errors.email && <div className='invalid-feedback'> {errors.email} </div>}
+
+                        </div>
+
+                            <div className='form-group mb-2'>
+                            <label className='form-label'>Select Department</label>
+                            <select className='form-control'
+                            value={departmentId}
+                            onChange={(e) => setDepartmentId(e.target.value)}
+                            >
+                                <option value="select department">Select department</option>
+                                {
+                                    departments.map(department => 
+                                        <option key={department.id} value={department.id}>
+                                            {department.departmentName}
+                                        </option>
+                                    )
+                                }
+                            </select>
                                 {errors.email && <div className='invalid-feedback'> {errors.email} </div>}
 
                         </div>

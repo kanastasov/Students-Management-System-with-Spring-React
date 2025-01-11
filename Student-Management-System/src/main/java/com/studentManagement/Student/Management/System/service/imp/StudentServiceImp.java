@@ -1,5 +1,7 @@
 package com.studentManagement.Student.Management.System.service.imp;
 
+import com.studentManagement.Student.Management.System.entity.Department;
+import com.studentManagement.Student.Management.System.repository.DepartmentRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -20,12 +22,20 @@ import com.studentManagement.Student.Management.System.service.StudentService;
 public class StudentServiceImp implements StudentService {
 
 	@Autowired
+	private DepartmentRepository departmentRepository;
+
+	@Autowired
 	private StudentRepository studentRepository;
 
 	@Override
 	public StudentDto createStudent(StudentDto studentDto) {
 
 		Student student = StudentMapper.mapStudent(studentDto);
+		Department department = departmentRepository.findById(studentDto.getDepartmentId()).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+
+		student.setDepartment(department);
+
+
 		Student savedStudent = studentRepository.save(student);
 
 		return StudentMapper.mapStudentDto(savedStudent);
@@ -51,7 +61,10 @@ public class StudentServiceImp implements StudentService {
 	public StudentDto updateStudent(Long id, StudentDto student) {
 		Student studentinner = studentRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Student not found with this ID " + id));
-		
+
+		Department department = departmentRepository.findById(student.getDepartmentId()).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+
+		studentinner.setDepartment(department);
 		studentinner.setEmail("NewEmail@gmail.com");
 		studentinner.setFirstName("NewFirstName");
 		studentinner.setLastName("MewLastName");
