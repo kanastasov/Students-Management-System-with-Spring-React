@@ -6,6 +6,7 @@ import FooterCompontn from './components/FooterCompontn';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import StudentComponent from './components/StudentComponent';
 import ListDepartmentComponent from './components/ListDepartmentComponent';
+import DepartmentComponent from './components/DepartmentComponent';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
             <Route path='/edit-student/:id' element={<StudentComponent />}></Route>
 
             <Route path='/departments' element={<ListDepartmentComponent />}></Route>
+            <Route path='/add-department' element={<DepartmentComponent />}></Route>
+
+            <Route path='/edit-department/:id' element={<DepartmentComponent />}></Route>
 
           </Routes>
         

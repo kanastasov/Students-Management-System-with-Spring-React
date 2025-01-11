@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/departments")
 @AllArgsConstructor
@@ -48,6 +49,11 @@ public class DepartmentController {
 
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable("id") Long id, @RequestBody DepartmentDto departmentDto) {
+        DepartmentDto departmentDto1 = departmentService.updateDepartment(id, departmentDto);
+        return ResponseEntity.ok(departmentDto1);
+    }
 
 
 

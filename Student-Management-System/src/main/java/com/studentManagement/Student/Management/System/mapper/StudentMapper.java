@@ -10,12 +10,17 @@ public class StudentMapper {
                 student.getId(),
                 student.getFirstName(),
                 student.getLastName(),
-                student.getEmail()
+                student.getEmail(),
+                student.getDepartment().getId()
         );
 
     }
 
     public static Student mapStudent(StudentDto studentDto) {
+
+        Student student = new Student();
         return new Student(studentDto.getId(), studentDto.getFirstName(), studentDto.getLastName(), studentDto.getEmail());
+
+
     }
 }

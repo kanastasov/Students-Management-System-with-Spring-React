@@ -15,6 +15,7 @@ public class StudentDto {
     private String firstName;
     private String lastName;
     private String email;
+    private Long departmentId;
 
     public Long getId() {
         return id;
@@ -48,10 +49,30 @@ public class StudentDto {
         this.email = email;
     }
 
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public StudentDto(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+
+    public StudentDto(Long id, String firstName, String lastName, String email, Long departmentId) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.departmentId = departmentId;
+    }
+
+    public StudentDto() {
     }
 }

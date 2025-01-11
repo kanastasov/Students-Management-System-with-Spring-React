@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getAllDepartments } from '../services/DepartmentService';
+import { deleteDepartmentService, getAllDepartments } from '../services/DepartmentService';
+import { Link,useNavigate } from 'react-router-dom';
 
 const ListDepartmentComponent = () => {
 
@@ -7,25 +8,42 @@ const ListDepartmentComponent = () => {
 
     const[departments, setDepartments] = useState([]);
 
+    const navigator = useNavigate();
+
     useEffect(() => {
-      getAllDepartments().then((response) => {
-        console.log(response.data);
+      listOfDepartments();
+        
+    })
+    function updateDepartment(id) {
+        navigator(`/edit-department/${id}`);
+    }
+
+    function deleteDepartment(id) {
+        deleteDepartmentService(id)
+        .then((response) => {
+            console.log(response.data);
+            listOfDepartments();
+        }).catch(err => {
+            console.log(err);
+        });
+
+
+    }
+
+     
+
+    function listOfDepartments(){
+        getAllDepartments().then((response) => {
+        // console.log(response.data);
         setDepartments(response.data);
       }).catch(error => {
         console.log(error) });
      
-        
-    }, [])
-    function updateDepartment() {
-
-    }
-
-    function deleteDepartment() {
-
     }
   return (
     <div className='container'>
         <h2 className='text-center'>List of Departments</h2>
+        <Link to='/add-department' className='btn btn-primary mb-2'>Add Department</Link>
  <table className='table table-striped table-border'>
                 <thead>
                 <tr>
