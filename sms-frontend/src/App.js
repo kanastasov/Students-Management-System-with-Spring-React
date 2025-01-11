@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent';
 import FooterCompontn from './components/FooterCompontn';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import StudentComponent from './components/StudentComponent';
+import ListDepartmentComponent from './components/ListDepartmentComponent';
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
              <Route path='/students' element={<ListStudentComponent />}></Route> 
 
 
-             <Route path='add-student' element={<StudentComponent />}></Route>
+             <Route path='/add-student' element={<StudentComponent />}></Route>
 
-            <Route path='edit-student/:id' element={<StudentComponent />}></Route>
+            <Route path='/edit-student/:id' element={<StudentComponent />}></Route>
+
+            <Route path='/departments' element={<ListDepartmentComponent />}></Route>
 
           </Routes>
         
