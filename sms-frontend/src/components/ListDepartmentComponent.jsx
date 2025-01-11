@@ -1,27 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAllDepartments } from '../services/DepartmentService';
 
 const ListDepartmentComponent = () => {
 
-    let data = [
-        {
-            "id": 1,
-            "departmentName": "StudentDepartment",
-            "departmentDescription": "Student departmentDesc"
-        },
-        {
-            "id": 2,
-            "departmentName": "StudentDepartment2",
-            "departmentDescription": "Student departmentDesc2"
-        },
-        {
-            "id": 3,
-            "departmentName": "StudentDepartment3",
-            "departmentDescription": "Student departmentDesc3"
-        },
-    ]
+  
 
-    const[departments, setDepartments] = useState(data);
+    const[departments, setDepartments] = useState([]);
 
+    useEffect(() => {
+      getAllDepartments().then((response) => {
+        console.log(response.data);
+        setDepartments(response.data);
+      }).catch(error => {
+        console.log(error) });
+     
+        
+    }, [])
     function updateDepartment() {
 
     }
