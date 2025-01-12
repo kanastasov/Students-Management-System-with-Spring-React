@@ -51,5 +51,20 @@ public class TodoServiceImp implements TodoService {
         return listOfTodoDto.stream().map((todo) -> modelMapper.map(todo, TodoDto.class)).collect(Collectors.toList());
     }
 
+    @Override
+    public TodoDto updateDto(TodoDto todoDto, Long id) {
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new RerouceNotFoundException("Todo not found to update: " + id));
+        todo.setTitle(todoDto.getTitle());
+        todo.setDescription(todoDto.getDescription());
+        todo.setCompleted(todoDto.isCompleted());
+        Todo updatedTodo = todoRepository.save(todo);
+        return modelMapper.map(updatedTodo, TodoDto.class);
+    }
+
+    @Override
+    public void deleteDto(Long id) {
+        todoRepository.deleteById(id);
+    }
+
 
 }
