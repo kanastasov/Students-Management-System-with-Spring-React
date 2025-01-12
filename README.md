@@ -1,8 +1,8 @@
-Project Title: Student Management System
+```Project Title: Student Management System```
 Project Description:
 The Student Management System is a robust web application designed to streamline and automate the management of student data. Built using modern web development technologies, this system demonstrates the implementation of the MVC (Model-View-Controller) architecture while adhering to best practices in software design and development.
 
-Technologies Used
+```Technologies Used```
 Backend Framework: Spring Boot
 Frontend Framework: React.js
 Database: PostgreSQL (PSQL)
@@ -11,23 +11,23 @@ Architectural Pattern: MVC with Data Transfer Objects (DTOs)
 Key Features
 Student Management:
 
-Add, update, delete, and retrieve student details such as name, age, grade, contact information, and enrollment status.
+```Add, update, delete, and retrieve``` student details such as name, age, grade, contact information, and enrollment status.
 Validation for data integrity (e.g., unique email addresses and required fields).
 Course Enrollment:
 
-Manage courses, including adding, modifying, and deleting courses.
+```Manage courses```, including adding, modifying, and deleting courses.
 Enroll students in courses and track enrollment status.
 Search and Filters:
 
-Search for students and courses using various criteria.
+```Search for students and courses using various criteria.```
 Filter records based on attributes such as grade level or enrollment status.
 Authentication and Authorization:
 
-User authentication with role-based access control (e.g., Admin, Teacher, Student).
+```User authentication with role-based access control``` (e.g., Admin, Teacher, Student).
 Secure API endpoints with Spring Security and JWT tokens.
 Responsive Design:
 
-A user-friendly interface designed with React.js to ensure compatibility across devices and browsers.
+```A user-friendly interface designed with React.js``` to ensure compatibility across devices and browsers.
 RESTful API integration with the backend for seamless data operations.
 Reporting:
 
