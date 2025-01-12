@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class TodoServiceImp implements TodoService {
 
@@ -40,6 +43,13 @@ public class TodoServiceImp implements TodoService {
         return modelMapper.map(todo, TodoDto.class);
     }
 
+    @Override
+    public List<TodoDto> getAllTodos() {
+       List<Todo> listOfTodoDto =  todoRepository.findAll();
+
+
+        return listOfTodoDto.stream().map((todo) -> modelMapper.map(todo, TodoDto.class)).collect(Collectors.toList());
+    }
 
 
 }
