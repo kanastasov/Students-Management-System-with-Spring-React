@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 public interface TodoService {
 
     TodoDto addTodo(TodoDto todoDto);
+
+    TodoDto getTodo(Long id);
 }
