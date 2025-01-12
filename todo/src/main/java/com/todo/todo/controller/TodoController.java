@@ -60,4 +60,12 @@ public class TodoController {
     }
 
 
+    @PatchMapping("{id}/complete")
+    public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long id){
+        TodoDto todoDtoSaved = todoService.completeTodo(id);
+        return new ResponseEntity<>(todoDtoSaved, HttpStatus.OK);
+    }
+
+
+
 }
