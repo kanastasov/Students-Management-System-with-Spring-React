@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { getAllTodos } from '../services/TodoService';
+import { completeService, deleteTodoService, getAllTodos, incompleteService } from '../services/TodoService';
 import {useNavigate, useParams} from 'react-router-dom';
 
 const ListTodoComponent = () => {
@@ -32,7 +32,30 @@ const ListTodoComponent = () => {
   }
 
   function deleteTodo(id){
+    deleteTodoService(id).then((res) => {
+      listTodos();
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
+  function complete(id) {
+    completeService(id).then(( res) => {
+      listTodos();
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  function incomplete(id){
+    incompleteService(id).then(( res) => {
+      listTodos();
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   return (
@@ -64,6 +87,13 @@ const ListTodoComponent = () => {
                                     </button>
                                          <button className='btn btn-danger' onClick={()=> deleteTodo(todo.id)}>
                                         Delete
+                                    </button>
+                                            <button className='btn btn-success' onClick={()=> complete(todo.id)}>
+                                        Complete
+                                    </button>
+
+                                            <button className='btn btn-info' onClick={()=> incomplete(todo.id)}>
+                                        Incomplete
                                     </button>
                                 </td>
                   </tr>
