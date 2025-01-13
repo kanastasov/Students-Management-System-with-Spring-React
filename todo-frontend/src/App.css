@@ -1,38 +1,34 @@
-.App {
+.footer {
+  background-color: #2c3e50;
+  /* Dark background color */
+  color: #ffffff;
+  /* White text */
+  padding: 20px;
+  /* Spacing inside the footer */
   text-align: center;
+  /* Center-align text */
+  font-size: 14px;
+  /* Adjust font size */
+  border-top: 1px solid #34495e;
+  /* Top border for separation */
+  position: relative;
+  /* Relative positioning */
+  bottom: 0;
+  /* Stick to the bottom if used with `position: absolute` */
+  width: 100%;
+  /* Full width */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footer a {
+  color: #1abc9c;
+  /* Link color */
+  text-decoration: none;
+  /* Remove underline from links */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer a:hover {
+  text-decoration: underline;
+  /* Underline links on hover */
 }
