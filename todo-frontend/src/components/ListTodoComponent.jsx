@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { getAllTodos } from '../services/TodoService';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 const ListTodoComponent = () => {
 
@@ -27,6 +27,14 @@ const ListTodoComponent = () => {
     navigate('/add-todo');
   }
 
+  function updateTodo(id){
+      navigate(`/update-todo/${id}`);
+  }
+
+  function deleteTodo(id){
+
+  }
+
   return (
     // <h1>sssss</h1>
      <div className="container">
@@ -40,6 +48,7 @@ const ListTodoComponent = () => {
                   <th>Todo Title  </th>
                      <th>Todo description  </th>
                         <th>Todo completed  </th>
+                         <th>Actions  </th>
               </tr>
                   </thead>
               <tbody>
@@ -49,6 +58,14 @@ const ListTodoComponent = () => {
                       <td> {todo.title} </td>
                       <td>{todo.description}</td>
                       <td>{todo.completed ? 'Yes' : 'No'}</td>
+                        <td>
+                                    <button className='btn btn-info' onClick={()=> updateTodo(todo.id)}>
+                                        Update
+                                    </button>
+                                         <button className='btn btn-danger' onClick={()=> deleteTodo(todo.id)}>
+                                        Delete
+                                    </button>
+                                </td>
                   </tr>
                   )
                 }
