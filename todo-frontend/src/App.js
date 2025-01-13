@@ -1,61 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import FooterComponent from './components/FooterComponent';
+import HeaderComponent from './components/HeaderComponent';
 import ListTodoComponent from './components/ListTodoComponent';
-import { useState } from 'react';
+
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import TodoComponent from './components/TodoComponent';
 
 function App() {
 
-  const data = [
-    {
-      "id": 1,
-      "title": "todo title",
-      "description": "to do description",
-      "completed": false
-
-    },
-      {
-      "id": 2,
-      "title": "todo title2",
-      "description": "to do description2",
-      "completed": false
-
-    },
-      {
-      "id": 3,
-      "title": "todo title3",
-      "description": "to do description3",
-      "completed": false
-
-    }
-  ]
-
-  const [todos, setTodos] = useState(data);
+  
   return (
-    <div className="container">
-        <h2 className='text-center'>List of todos</h2>
-          <table className='table table-bordered table-striped'>
-            <thead>
-              <tr>
-                  <th>Todo Title  </th>
-                     <th>Todo description  </th>
-                        <th>Todo completed  </th>
-              </tr>
-                  </thead>
-              <tbody>
-                {
-                  todos.map( (todo) =>  
-                    <tr key={todo.id}>
-                      <td> {todo.title} </td>
-                      <td>{todo.description}</td>
-                      <td>{todo.completed ? 'Yes' : 'No'}</td>
-                  </tr>
-                  )
-                }
-                  
-              </tbody>
-        
-          </table>
-        <ListTodoComponent />
+    <div>
+      <BrowserRouter>
+        <HeaderComponent />
+
+      <Routes>
+        <Route path = '/' element = {    <ListTodoComponent />}></Route>
+        <Route path = '/todos' element = {<ListTodoComponent />}></Route>
+        <Route path = '/add-todo' element= {<TodoComponent />} ></Route>
+
+        <Route path = '/update-todo/:id' element= {<TodoComponent />} ></Route>
+
+      </Routes>
+    
+        <FooterComponent />
+      </BrowserRouter>
     </div>
   );
 }
