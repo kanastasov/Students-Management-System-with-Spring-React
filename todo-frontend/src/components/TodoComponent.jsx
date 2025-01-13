@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { saveTodo } from '../services/TodoService';
+import { getTodo, saveTodo, updateTodo } from '../services/TodoService';
 
 const TodoComponent = () => {
 
@@ -19,18 +19,44 @@ const TodoComponent = () => {
             return <h2 className='text-center'>Add todo</h2>
         }
     }
+
+        useEffect(() => {
+            if(id){
+                getTodo(id).then((res) => {
+                    console.log(res);
+                    setTitle(res.data.title);
+                    setDecription(res.data.description);
+                    setCompleted(res.data.completed);
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }, [])
+
+
     function saveOrUpdateTodo(e){
         e.preventDefault();
 
         const todo = {title, description, completed};
         console.log(todo);
 
+        if(id) {
+            updateTodo(id, todo).then((res => {
+                console.log(res);
+                navigate('/todos');
+            })).catch(err => {
+                console.log(err);
+            });
+        }else {
         saveTodo(todo).then((response) => {
-            console.log(response);
-            navigate('/todos')
-        }).catch(err => {
-            console.log(err);
-        });
+                    console.log(response);
+                    navigate('/todos')
+                }).catch(err => {
+                    console.log(err);
+                });
+        }
+
+     
     }
   return (
     <div className='container'>
