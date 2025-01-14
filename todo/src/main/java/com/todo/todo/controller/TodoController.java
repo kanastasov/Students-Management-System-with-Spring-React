@@ -69,7 +69,7 @@ public class TodoController {
         TodoDto todoDtoSaved = todoService.completeTodo(id);
         return new ResponseEntity<>(todoDtoSaved, HttpStatus.OK);
     }
-    
+
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("{id}/incomplete")
     public ResponseEntity<TodoDto> incompleteTodo(@PathVariable("id") Long id){
