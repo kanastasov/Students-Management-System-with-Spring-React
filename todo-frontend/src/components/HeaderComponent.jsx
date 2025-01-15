@@ -1,7 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { isUserLoggedIn, logout } from '../services/AuthService'
 
 const HeaderComponent = () => {
+  const isAuth = isUserLoggedIn();
+  function handleLogout() {
+    logout();
+  }
   return (
     <div>
         <header>
@@ -11,27 +16,49 @@ const HeaderComponent = () => {
             </div>
             <div className='collapse navbar-collapse'>
               <ul className='navbar-nav'>
-                <li className='navbar-item'>
+
+                {
+                 isAuth && 
+                  <li className='navbar-item'>
                   <NavLink to="/todos" className="nav-link">Todos
 
                   </NavLink>
-                </li>
+                </li> 
+                }
+               
 
               </ul>
             </div>
 
             <ul className='navbar-nav'>
+              {
+                !isAuth && 
                 <li className='navbar-item'>
                   <NavLink to="/register" className="nav-link">Register
 
                   </NavLink>
                 </li>
-
-                 <li className='navbar-item'>
+              }
+               
+               {
+                !isAuth &&  
+                <li className='navbar-item'>
                   <NavLink to="/login" className="nav-link">Login
 
                   </NavLink>
                 </li>
+               }
+
+              {
+                !isAuth &&  
+                <li className='navbar-item'>
+                  <NavLink to="/logout" className="nav-link" onClick={handleLogout()}>Logout
+
+                  </NavLink>
+                </li>
+               }
+
+               
 
               </ul>
 
