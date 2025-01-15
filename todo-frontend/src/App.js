@@ -6,6 +6,7 @@ import ListTodoComponent from './components/ListTodoComponent';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import TodoComponent from './components/TodoComponent';
 import RegisterComponent from './components/RegisterComponent';
+import LoginComponent from './components/LoginComponent';
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
         <Route path = '/update-todo/:id' element= {<TodoComponent />} ></Route>
 
         <Route path = '/register' element= {<RegisterComponent  />} ></Route>
+
+        <Route path = '/login' element= {<LoginComponent  />} ></Route>
 
       </Routes>
     
