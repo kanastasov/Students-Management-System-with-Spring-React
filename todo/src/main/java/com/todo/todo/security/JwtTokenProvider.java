@@ -13,7 +13,7 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
-public class JwtToeknProvider {
+public class JwtTokenProvider {
 
     @Value("${app.jwt-secret")
     private String jwtSecret;
@@ -67,10 +67,10 @@ public class JwtToeknProvider {
     	return  Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public JwtToeknProvider() {
+    public JwtTokenProvider() {
     }
 
-    public JwtToeknProvider(String jwtSecret, long jwtExpiration) {
+    public JwtTokenProvider(String jwtSecret, long jwtExpiration) {
         this.jwtSecret = jwtSecret;
         this.jwtExpiration = jwtExpiration;
     }
